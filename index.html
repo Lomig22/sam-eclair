@@ -214,10 +214,16 @@ section { padding: 96px 0; position: relative; }
    3. HERO
 ============================================================ */
 .hero {
-  background: var(--void);
-  background-image: var(--led-filaments-strong);
-  background-repeat: repeat;
-  background-size: 300px 100px;
+  /* superposition (du dessus vers le dessous) :
+     filaments LED → dégradé sombre lisibilité → photo Unsplash ampoule chaude */
+  background-color: var(--void);
+  background-image:
+    var(--led-filaments-strong),
+    linear-gradient(to right, rgba(8,8,8,0.97) 0%, rgba(8,8,8,0.85) 42%, rgba(8,8,8,0.55) 100%),
+    url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80');
+  background-repeat: repeat, no-repeat, no-repeat;
+  background-size: 300px 100px, cover, cover;
+  background-position: 0 0, center, center right;
   padding-top: 150px;
   padding-bottom: 110px;
   position: relative;
@@ -227,12 +233,13 @@ section { padding: 96px 0; position: relative; }
 .hero::before {
   content: '';
   position: absolute; top: -10%; right: 0; width: 60%; height: 80%;
-  background: radial-gradient(circle, rgba(245,197,24,0.08), transparent 65%);
+  background: radial-gradient(circle, rgba(245,197,24,0.10), transparent 65%);
   pointer-events: none;
 }
 .hero-grid {
-  display: grid; grid-template-columns: 60% 40%;
+  display: grid; grid-template-columns: 1fr;
   gap: 48px; align-items: center; position: relative; z-index: 1;
+  max-width: 720px;
 }
 .eyebrow-hero {
   font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 12px;
@@ -278,26 +285,6 @@ section { padding: 96px 0; position: relative; }
   background: var(--circuit); border-radius: 20px;
   padding: 8px 16px; font-size: 13px; color: var(--wire); font-weight: 400;
   border: 1px solid rgba(245,197,24,0.08);
-}
-
-/* Portrait circulaire */
-.hero-portrait { display: flex; justify-content: center; }
-.portrait-circle {
-  width: 280px; height: 280px; border-radius: 50%;
-  background: var(--circuit);
-  border: 2px solid var(--lumen);
-  display: flex; align-items: center; justify-content: center;
-  position: relative;
-  box-shadow: 0 0 50px rgba(245,197,24,0.15);
-}
-.portrait-circle::after {
-  content: 'PORTRAIT SAM';
-  font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 11px;
-  letter-spacing: 0.15em; color: var(--dimmed); text-transform: uppercase;
-}
-.portrait-circle .spark {
-  position: absolute; top: 14px; right: 14px;
-  font-size: 22px;
 }
 
 /* ============================================================
@@ -571,9 +558,7 @@ section { padding: 96px 0; position: relative; }
   .nav-links, .header .btn-cta { display: none; }
   .burger { display: flex; }
 
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
-  .hero-portrait { order: -1; }
-  .portrait-circle { width: 200px; height: 200px; }
+  .hero-grid { gap: 40px; }
 
   .eclairage-grid { grid-template-columns: 1fr; gap: 36px; }
   .contact-grid { grid-template-columns: 1fr; }
@@ -663,12 +648,6 @@ section { padding: 96px 0; position: relative; }
           <span class="badge">⚡ 20 ans d'expérience</span>
           <span class="badge">💡 Éclairage &amp; design</span>
           <span class="badge">📍 Isère (38)</span>
-        </div>
-      </div>
-
-      <div class="hero-portrait reveal">
-        <div class="portrait-circle">
-          <span class="spark">⚡</span>
         </div>
       </div>
     </div>
