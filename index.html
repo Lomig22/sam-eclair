@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sam Éclair Électricité — Électricien · Éclairage & Rénovation · Isère (38)</title>
+<meta name="description" content="Électricien passionné avec près de 20 ans d'expérience en Isère (38). Dépannage, rénovation, éclairage d'ambiance et de jardin pour particuliers et professionnels. Devis gratuit.">
+
+<!-- ============================================================
+     GOOGLE FONTS — seule dépendance externe autorisée
+     Syne (display) + Epilogue (corps & labels)
+============================================================ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Epilogue:wght@300;400;500;600&display=swap');
+
+/* ============================================================
+   1. TOKENS — toutes les couleurs en variables, zéro hardcode
+============================================================ */
+:root {
+  --void:    #080808; /* fond principal — noir absolu, la nuit avant la lumière */
+  --lumen:   #F5C518; /* accent signature — jaune ambre LED chaude 2700-3000K */
+  --wire:    #F0EDE8; /* texte principal — blanc chaud, filament d'ampoule */
+  --circuit: #141414; /* sections alternées — noir légèrement plus clair */
+  --dimmed:  #6B6560; /* texte secondaire — lumière tamisée, gris chaud */
+  --glow:    #FFD95A; /* hover states — lueur plus claire, halo de LED */
+
+  /* rythme & layout */
+  --maxw: 1180px;
+  --pad: 24px;
+  --radius: 8px;
+
+  /* easing scroll reveal */
+  --ease: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ============================================================
+   RESET
+============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+
+body {
+  background: var(--void);
+  color: var(--wire);
+  font-family: 'Epilogue', system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+/* ============================================================
+   TYPOGRAPHIE GÉNÉRIQUE
+============================================================ */
+h1, h2, h3 { font-family: 'Syne', sans-serif; line-height: 1.05; }
+
+.eyebrow {
+  font-family: 'Epilogue', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 12px;
+  color: var(--lumen);
+  margin-bottom: 18px;
+  display: inline-block;
+}
+
+.section-title {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  color: var(--wire);
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: -0.01em;
+  margin-bottom: 18px;
+}
+
+.section-sub {
+  font-weight: 300;
+  color: var(--dimmed);
+  max-width: 560px;
+  font-size: 16px;
+}
+
+/* ============================================================
+   LAYOUT HELPERS
+============================================================ */
+.wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 var(--pad); }
+
+section { padding: 96px 0; position: relative; }
+
+/* Sections alternées --circuit + filaments LED en background */
+.circuit {
+  background-color: var(--circuit);
+  background-image: var(--led-filaments);
+  background-repeat: repeat;
+  background-size: 300px 100px;
+}
+
+/* ============================================================
+   FILAMENTS LED SVG — signature visuelle
+   3 paths sinueux ondulant sur une tuile 300x100, opacity 0.04-0.07
+   Encodé en data-uri sur une variable, appliqué sur --circuit
+============================================================ */
+:root {
+  --led-filaments: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='300' height='100' viewBox='0 0 300 100'>\
+<path d='M0,40 C50,20 100,60 150,35 C200,10 250,55 300,30' fill='none' stroke='%23F5C518' stroke-width='1.2' stroke-opacity='0.06' stroke-linecap='round'/>\
+<path d='M0,72 C60,90 110,50 160,72 C210,94 260,55 300,75' fill='none' stroke='%23F5C518' stroke-width='1' stroke-opacity='0.05' stroke-linecap='round'/>\
+<path d='M0,15 C70,30 130,5 190,22 C240,36 280,12 300,18' fill='none' stroke='%23F5C518' stroke-width='0.9' stroke-opacity='0.04' stroke-linecap='round'/>\
+</svg>");
+  /* variante plus visible pour le hero (opacity ~0.06-0.07) */
+  --led-filaments-strong: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='300' height='100' viewBox='0 0 300 100'>\
+<path d='M0,40 C50,18 100,62 150,34 C200,8 250,58 300,28' fill='none' stroke='%23F5C518' stroke-width='1.4' stroke-opacity='0.07' stroke-linecap='round'/>\
+<path d='M0,74 C60,92 110,48 160,72 C210,96 260,52 300,78' fill='none' stroke='%23F5C518' stroke-width='1.2' stroke-opacity='0.06' stroke-linecap='round'/>\
+<path d='M0,12 C70,32 130,2 190,22 C240,38 280,8 300,16' fill='none' stroke='%23F5C518' stroke-width='1' stroke-opacity='0.05' stroke-linecap='round'/>\
+</svg>");
+}
+
+/* ============================================================
+   2. HEADER FIXE
+============================================================ */
+.header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: var(--void);
+  border-bottom: 1px solid rgba(245,197,24,0.12);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.header.scrolled {
+  border-bottom-color: rgba(245,197,24,0.35);
+  box-shadow: 0 1px 24px rgba(0,0,0,0.5);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+/* Logo */
+.logo { display: flex; align-items: baseline; gap: 7px; line-height: 1; }
+.logo .l-sam {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  text-transform: uppercase; color: var(--lumen); font-size: 22px;
+  letter-spacing: 0.02em;
+}
+.logo .l-eclair {
+  font-family: 'Syne', sans-serif; font-weight: 600;
+  text-transform: uppercase; color: var(--wire); font-size: 22px;
+  letter-spacing: 0.02em;
+}
+.logo .l-elec {
+  font-family: 'Epilogue', sans-serif; font-weight: 400;
+  text-transform: uppercase; color: var(--dimmed); font-size: 10px;
+  letter-spacing: 0.15em; align-self: center;
+}
+
+/* Nav desktop */
+.nav { display: flex; align-items: center; gap: 30px; }
+.nav-links { display: flex; gap: 26px; }
+.nav-links a {
+  font-family: 'Epilogue', sans-serif; font-weight: 500; font-size: 13px;
+  color: var(--dimmed); transition: color 0.2s ease; position: relative;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--lumen); }
+
+/* CTA header */
+.btn-cta {
+  font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 13px;
+  background: var(--lumen); color: var(--void);
+  padding: 10px 20px; border-radius: 4px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.btn-cta:hover { background: var(--glow); transform: translateY(-1px); }
+
+/* Hamburger */
+.burger { display: none; flex-direction: column; gap: 5px; padding: 8px; z-index: 110; }
+.burger span {
+  width: 24px; height: 2px; background: var(--wire);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger.open span:nth-child(2) { opacity: 0; }
+.burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Overlay mobile */
+.mobile-overlay {
+  position: fixed; inset: 0; z-index: 105;
+  background: var(--void);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 28px;
+  opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.mobile-overlay.open { opacity: 1; visibility: visible; }
+.mobile-overlay a {
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 26px;
+  color: var(--wire); transition: color 0.2s ease;
+}
+.mobile-overlay a:hover { color: var(--lumen); }
+
+/* ============================================================
+   3. HERO
+============================================================ */
+.hero {
+  background: var(--void);
+  background-image: var(--led-filaments-strong);
+  background-repeat: repeat;
+  background-size: 300px 100px;
+  padding-top: 150px;
+  padding-bottom: 110px;
+  position: relative;
+  overflow: hidden;
+}
+/* halo radial doux derrière le hero */
+.hero::before {
+  content: '';
+  position: absolute; top: -10%; right: 0; width: 60%; height: 80%;
+  background: radial-gradient(circle, rgba(245,197,24,0.08), transparent 65%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 60% 40%;
+  gap: 48px; align-items: center; position: relative; z-index: 1;
+}
+.eyebrow-hero {
+  font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.16em; color: var(--lumen);
+  margin-bottom: 26px; display: block;
+}
+.hero h1 {
+  font-family: 'Syne', sans-serif; font-weight: 800;
+  font-size: clamp(46px, 8vw, 92px); line-height: 1.0; color: var(--wire);
+  letter-spacing: -0.02em; margin-bottom: 26px;
+}
+.hero h1 .accent { color: var(--lumen); display: block; }
+.hero-subtitle {
+  font-weight: 300; font-size: 18px; color: var(--dimmed);
+  max-width: 440px; margin-bottom: 22px; line-height: 1.7;
+}
+.hero-quote {
+  font-style: italic; font-size: 14px; color: var(--lumen);
+  margin-bottom: 32px; opacity: 0.9;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 36px; }
+.btn-primary {
+  font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 15px;
+  background: var(--lumen); color: var(--void);
+  padding: 14px 32px; border-radius: 4px;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-primary:hover {
+  background: var(--glow); transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(245,197,24,0.25);
+}
+.btn-ghost {
+  font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 15px;
+  background: transparent; color: var(--wire);
+  border: 1px solid var(--wire); padding: 13px 30px; border-radius: 4px;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.btn-ghost:hover { border-color: var(--lumen); color: var(--lumen); }
+
+/* Badges */
+.badges { display: flex; gap: 12px; flex-wrap: wrap; }
+.badge {
+  background: var(--circuit); border-radius: 20px;
+  padding: 8px 16px; font-size: 13px; color: var(--wire); font-weight: 400;
+  border: 1px solid rgba(245,197,24,0.08);
+}
+
+/* Portrait circulaire */
+.hero-portrait { display: flex; justify-content: center; }
+.portrait-circle {
+  width: 280px; height: 280px; border-radius: 50%;
+  background: var(--circuit);
+  border: 2px solid var(--lumen);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  box-shadow: 0 0 50px rgba(245,197,24,0.15);
+}
+.portrait-circle::after {
+  content: 'PORTRAIT SAM';
+  font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 11px;
+  letter-spacing: 0.15em; color: var(--dimmed); text-transform: uppercase;
+}
+.portrait-circle .spark {
+  position: absolute; top: 14px; right: 14px;
+  font-size: 22px;
+}
+
+/* ============================================================
+   4. SERVICES
+============================================================ */
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 18px; margin-top: 48px;
+}
+.service-card {
+  background: var(--void); border-radius: var(--radius);
+  border-top: 2px solid var(--lumen);
+  padding: 30px 26px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.service-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 24px rgba(245,197,24,0.1);
+}
+.service-icon { margin-bottom: 18px; color: var(--lumen); }
+.service-icon svg { width: 30px; height: 30px; stroke: var(--lumen); fill: none; stroke-width: 1.8; }
+.service-card h3 {
+  font-family: 'Syne', sans-serif; font-weight: 600; font-size: 20px;
+  color: var(--wire); margin-bottom: 12px;
+}
+.service-card p { font-weight: 300; color: var(--dimmed); font-size: 15px; line-height: 1.65; }
+
+/* ============================================================
+   5. ÉCLAIRAGE — spécialité signature
+============================================================ */
+.eclairage-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 56px; align-items: center;
+}
+.eclairage-text p.lead {
+  font-weight: 300; color: var(--dimmed); line-height: 1.9;
+  font-size: 17px; margin-bottom: 32px;
+}
+.points { display: flex; flex-direction: column; gap: 20px; }
+.point {
+  border-left: 2px solid var(--lumen); padding-left: 18px;
+}
+.point strong {
+  font-family: 'Syne', sans-serif; font-weight: 600; color: var(--wire);
+  font-size: 17px; display: block; margin-bottom: 4px;
+}
+.point span { font-weight: 300; color: var(--dimmed); font-size: 15px; }
+
+/* Galerie 2x2 placeholder */
+.eclairage-gallery {
+  display: grid; grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr; gap: 10px;
+}
+.gal-tile {
+  aspect-ratio: 1 / 1; background: var(--circuit); border-radius: 6px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: flex-end; padding: 14px;
+}
+.gal-tile::before {
+  content: ''; position: absolute; inset: 0;
+  background: var(--lumen); opacity: 0; transition: opacity 0.3s ease;
+}
+.gal-tile:hover::before { opacity: 0.08; }
+.gal-tile span {
+  position: relative; z-index: 1; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--dimmed);
+}
+
+/* ============================================================
+   6. RÉALISATIONS — galerie asymétrique
+============================================================ */
+.realisations-gallery {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 260px 260px;
+  gap: 4px; margin-top: 44px;
+}
+.real-item {
+  background: var(--void); border-radius: 4px;
+  position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid rgba(245,197,24,0.06);
+}
+.real-item:first-child { grid-row: 1 / 3; }
+.real-item .placeholder-label {
+  font-size: 11px; color: var(--dimmed); font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0 16px; text-align: center;
+}
+.real-item .overlay {
+  position: absolute; inset: 0;
+  background: rgba(8,8,8,0.6);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s ease; padding: 0 18px;
+}
+.real-item .overlay span {
+  font-family: 'Syne', sans-serif; font-weight: 600; font-size: 16px;
+  color: var(--lumen); text-align: center;
+}
+.real-item:hover .overlay { opacity: 1; }
+
+.real-cta {
+  margin-top: 36px; text-align: center;
+}
+.real-cta a {
+  font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 16px;
+  color: var(--lumen); transition: color 0.2s ease;
+}
+.real-cta a:hover { color: var(--glow); }
+
+/* ============================================================
+   7. PROCESSUS
+============================================================ */
+.process-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 28px; margin-top: 48px; position: relative;
+}
+/* filament reliant les étapes (desktop) */
+.process-grid::before {
+  content: ''; position: absolute;
+  top: 28px; left: 16%; right: 16%; height: 2px;
+  background: repeating-linear-gradient(90deg, var(--lumen) 0 8px, transparent 8px 16px);
+  opacity: 0.2; z-index: 0;
+}
+.process-step { position: relative; z-index: 1; }
+.step-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--void); border: 2px solid var(--lumen);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif; font-weight: 800; font-size: 22px;
+  color: var(--lumen); margin-bottom: 20px;
+}
+.process-step h3 {
+  font-family: 'Syne', sans-serif; font-weight: 600; font-size: 19px;
+  color: var(--wire); margin-bottom: 10px;
+}
+.process-step p { font-weight: 300; color: var(--dimmed); font-size: 15px; line-height: 1.65; }
+
+/* ============================================================
+   8. TÉMOIGNAGES
+============================================================ */
+.testimonials-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 18px; margin-top: 44px;
+}
+.testimonial {
+  background: var(--void); border-radius: var(--radius);
+  border-left: 2px solid var(--lumen);
+  box-shadow: 0 0 16px rgba(245,197,24,0.05);
+  padding: 28px 26px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.testimonial p {
+  font-weight: 300; color: var(--wire); font-size: 15px; line-height: 1.7;
+  font-style: italic;
+}
+.testimonial .author {
+  font-weight: 500; font-size: 14px; color: var(--dimmed); font-style: normal;
+}
+.testimonial .stars { color: var(--lumen); letter-spacing: 2px; font-size: 14px; }
+
+/* ============================================================
+   9. CONTACT
+============================================================ */
+.contact {
+  background: var(--void);
+  background-image: var(--led-filaments-strong);
+  background-repeat: repeat; background-size: 300px 100px;
+}
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1.2fr;
+  gap: 32px; margin-top: 48px; align-items: start;
+}
+.contact-left {
+  background: rgba(245,197,24,0.04);
+  border: 1px solid rgba(245,197,24,0.15);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.btn-dm {
+  font-family: 'Epilogue', sans-serif; font-weight: 700; font-size: 15px;
+  background: var(--lumen); color: var(--void);
+  padding: 15px; border-radius: 4px; width: 100%;
+  display: block; text-align: center; margin-bottom: 24px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+.btn-dm:hover { background: var(--glow); box-shadow: 0 0 24px rgba(245,197,24,0.2); }
+.contact-info { display: flex; flex-direction: column; gap: 14px; }
+.contact-info li { color: var(--wire); font-size: 15px; font-weight: 300; }
+.contact-info li .lbl {
+  color: var(--lumen); font-weight: 600; font-size: 12px;
+  text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 2px;
+}
+.contact-info .network {
+  margin-top: 8px; padding-top: 16px; border-top: 1px solid rgba(245,197,24,0.12);
+  font-size: 13px; color: var(--dimmed);
+}
+.contact-info .network a { color: var(--lumen); }
+
+/* Formulaire */
+.contact-form { display: flex; flex-direction: column; gap: 22px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.field label {
+  display: block; font-size: 12px; font-weight: 600; color: var(--lumen);
+  text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 8px;
+}
+.field input, .field select, .field textarea {
+  width: 100%; background: transparent;
+  border: none; border-bottom: 1px solid rgba(245,197,24,0.2);
+  padding: 12px 0; color: var(--wire); font-family: 'Epilogue', sans-serif;
+  font-size: 15px; transition: border-color 0.2s ease;
+}
+.field input::placeholder, .field textarea::placeholder { color: var(--dimmed); }
+.field input:focus, .field select:focus, .field textarea:focus {
+  outline: none; border-bottom-color: var(--lumen);
+}
+.field select { cursor: pointer; }
+.field select option { background: var(--circuit); color: var(--wire); }
+.field textarea { resize: vertical; min-height: 90px; }
+.btn-submit {
+  font-family: 'Epilogue', sans-serif; font-weight: 600; font-size: 15px;
+  background: var(--lumen); color: var(--void);
+  padding: 15px; border-radius: 4px; width: 100%;
+  transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+.btn-submit:hover {
+  background: var(--glow); transform: translateY(-1px);
+  box-shadow: 0 0 24px rgba(245,197,24,0.2);
+}
+
+/* ============================================================
+   10. FOOTER
+============================================================ */
+.footer {
+  background: var(--circuit);
+  border-top: 1px solid rgba(245,197,24,0.2);
+  padding: 56px 0 40px;
+}
+.footer-inner { display: flex; flex-direction: column; gap: 14px; align-items: center; text-align: center; }
+.footer .f-logo {
+  font-family: 'Syne', sans-serif; font-weight: 700; font-size: 20px;
+  color: var(--wire); letter-spacing: 0.02em;
+}
+.footer .f-tag { font-style: italic; color: var(--dimmed); font-size: 15px; }
+.footer .f-social { display: flex; gap: 18px; margin: 6px 0; }
+.footer .f-social a { color: var(--lumen); font-size: 14px; font-weight: 500; transition: color 0.2s ease; }
+.footer .f-social a:hover { color: var(--glow); }
+.footer .f-copy { color: var(--dimmed); font-size: 13px; }
+.footer .f-credit { color: var(--dimmed); font-size: 12px; opacity: 0.7; }
+.footer .f-credit a { color: var(--dimmed); }
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+.reveal {
+  opacity: 0; transform: translateY(16px);
+  transition: opacity 0.55s var(--ease), transform 0.55s var(--ease);
+}
+.reveal.revealed { opacity: 1; transform: translateY(0); }
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+@media (max-width: 1024px) {
+  .services-grid, .process-grid, .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-grid::before { display: none; }
+}
+
+@media (max-width: 768px) {
+  section { padding: 72px 0; }
+  .nav-links, .header .btn-cta { display: none; }
+  .burger { display: flex; }
+
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  .hero-portrait { order: -1; }
+  .portrait-circle { width: 200px; height: 200px; }
+
+  .eclairage-grid { grid-template-columns: 1fr; gap: 36px; }
+  .contact-grid { grid-template-columns: 1fr; }
+
+  .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; gap: 36px; }
+
+  .realisations-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 180px);
+  }
+  .real-item:first-child { grid-row: auto; grid-column: 1 / 3; }
+}
+
+@media (max-width: 480px) {
+  :root { --pad: 18px; }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-ctas { flex-direction: column; }
+  .hero-ctas .btn-primary, .hero-ctas .btn-ghost { text-align: center; }
+  .realisations-gallery { grid-template-columns: 1fr; grid-template-rows: repeat(5, 160px); }
+  .real-item:first-child { grid-column: auto; }
+}
+
+/* ============================================================
+   PREFERS-REDUCED-MOTION
+============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  .service-card, .btn-primary, .btn-cta, .btn-submit, .btn-dm,
+  .gal-tile::before, .real-item .overlay { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER
+============================================================ -->
+<header class="header" id="header">
+  <div class="wrap header-inner">
+    <a href="#hero" class="logo" aria-label="Sam Éclair Électricité — accueil">
+      <span class="l-sam">Sam</span><span class="l-eclair">Éclair</span><span class="l-elec">Électricité</span>
+    </a>
+
+    <nav class="nav" aria-label="Navigation principale">
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#eclairage">Éclairage</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn-cta">Devis gratuit</a>
+    </nav>
+
+    <button class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Overlay mobile -->
+<div class="mobile-overlay" id="mobileOverlay">
+  <a href="#services">Services</a>
+  <a href="#eclairage">Éclairage</a>
+  <a href="#realisations">Réalisations</a>
+  <a href="#contact">Contact</a>
+  <a href="#contact" style="color:var(--lumen)">Devis gratuit</a>
+</div>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text reveal">
+        <span class="eyebrow-hero">Électricien · 20 ans d'expérience · Isère (38)</span>
+        <h1>La lumière,<span class="accent">c'est lui.</span></h1>
+        <p class="hero-subtitle">Électricien passionné avec près de 20 ans d'expérience. Dépannage, rénovation, éclairage d'ambiance et de jardin — pour les particuliers et les professionnels.</p>
+        <p class="hero-quote">« T'allumes pas la lumière… c'est elle qui te suit. »</p>
+        <div class="hero-ctas">
+          <a href="#contact" class="btn-primary">Demander un devis</a>
+          <a href="#realisations" class="btn-ghost">Voir les réalisations</a>
+        </div>
+        <div class="badges">
+          <span class="badge">⚡ 20 ans d'expérience</span>
+          <span class="badge">💡 Éclairage &amp; design</span>
+          <span class="badge">📍 Isère (38)</span>
+        </div>
+      </div>
+
+      <div class="hero-portrait reveal">
+        <div class="portrait-circle">
+          <span class="spark">⚡</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SERVICES
+============================================================ -->
+<section class="services circuit" id="services">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Services</span>
+      <h2 class="section-title">Tout l'électrique. Avec le sens du détail.</h2>
+    </div>
+
+    <div class="services-grid">
+      <!-- 1 -->
+      <article class="service-card reveal">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg>
+        </div>
+        <h3>Dépannage</h3>
+        <p>Panne, disjoncteur, court-circuit. Intervention rapide pour remettre le courant, en toute sécurité.</p>
+      </article>
+      <!-- 2 -->
+      <article class="service-card reveal">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11 12 3l9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+        </div>
+        <h3>Neuf &amp; Rénovation</h3>
+        <p>Tableau électrique, câblage complet, mise aux normes NF&nbsp;C&nbsp;15-100. Neuf ou rénovation.</p>
+      </article>
+      <!-- 3 -->
+      <article class="service-card reveal">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10c1 1 1 2 1 3h6c0-1 0-2 1-3a6 6 0 0 0-4-10z"/></svg>
+        </div>
+        <h3>Éclairage d'ambiance</h3>
+        <p>Rubans LED, spots encastrés, variation. L'éclairage qui transforme un espace en expérience.</p>
+      </article>
+      <!-- 4 -->
+      <article class="service-card reveal">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12c0-4 2-7 6-8-1 4-3 7-6 8z"/><path d="M12 14c0-3-2-6-6-7 1 4 3 6 6 7z"/></svg>
+        </div>
+        <h3>Éclairage de jardin</h3>
+        <p>Bornes, spots encastrés, mise en valeur de la végétation. Votre jardin, la nuit, devient autre chose.</p>
+      </article>
+      <!-- 5 -->
+      <article class="service-card reveal">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M4 8h16"/><path d="M4 13h16"/></svg>
+        </div>
+        <h3>Motorisation</h3>
+        <p>Volets roulants, portails, automatismes. Confort et sécurité pilotés depuis votre smartphone.</p>
+      </article>
+      <!-- 6 -->
+      <article class="service-card reveal">
+        <div class="service-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M8 9h8"/><path d="M8 13h5"/><path d="M16 17v-2"/></svg>
+        </div>
+        <h3>Tableaux électriques</h3>
+        <p>Remplacement et création, gamme Schneider Electric. Câblage organisé, étiquetage inclus, travail propre.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ÉCLAIRAGE — spécialité signature
+============================================================ -->
+<section class="eclairage" id="eclairage">
+  <div class="wrap">
+    <div class="eclairage-grid">
+      <div class="eclairage-text reveal">
+        <span class="eyebrow">L'éclairage par Sam</span>
+        <h2 class="section-title">La lumière qui change tout.</h2>
+        <p class="lead">Il y a l'électricité fonctionnelle — et il y a l'éclairage qui transforme un couloir en décor, un jardin en tableau nocturne, un escalier en œuvre. Avec près de 20 ans de métier et un œil affûté pour l'ambiance, Sam Éclair crée des installations lumineuses qui restent.</p>
+        <div class="points">
+          <div class="point">
+            <strong>Éclairage LED intérieur</strong>
+            <span>Rubans, variation, rendu chaud.</span>
+          </div>
+          <div class="point">
+            <strong>Jardin &amp; paysager</strong>
+            <span>Spots encastrés, bornes, mise en scène nocturne.</span>
+          </div>
+          <div class="point">
+            <strong>Motorisation intégrée</strong>
+            <span>Scènes lumineuses automatisées.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="eclairage-gallery reveal">
+        <div class="gal-tile"><span>Jardin LED</span></div>
+        <div class="gal-tile"><span>Escalier</span></div>
+        <div class="gal-tile"><span>Couloir</span></div>
+        <div class="gal-tile"><span>Ambiance</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     RÉALISATIONS — galerie nocturne
+============================================================ -->
+<section class="realisations circuit" id="realisations">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Réalisations</span>
+      <h2 class="section-title">Des chantiers qui se voient la nuit.</h2>
+      <p class="section-sub">Éclairages, tableaux, motorisation — 170 publications sur Instagram pour suivre chaque projet.</p>
+    </div>
+
+    <div class="realisations-gallery reveal">
+      <div class="real-item">
+        <span class="placeholder-label">Jardin — éclairage LED nocturne</span>
+        <div class="overlay"><span>Jardin — éclairage LED nocturne</span></div>
+      </div>
+      <div class="real-item">
+        <span class="placeholder-label">Escalier — ruban LED</span>
+        <div class="overlay"><span>Escalier — ruban LED ambiance</span></div>
+      </div>
+      <div class="real-item">
+        <span class="placeholder-label">Couloir — installation LED</span>
+        <div class="overlay"><span>Couloir — installation LED</span></div>
+      </div>
+      <div class="real-item">
+        <span class="placeholder-label">Tableau Schneider</span>
+        <div class="overlay"><span>Tableau Schneider — câblage propre</span></div>
+      </div>
+      <div class="real-item">
+        <span class="placeholder-label">Motorisation</span>
+        <div class="overlay"><span>Motorisation — volet et portail</span></div>
+      </div>
+    </div>
+
+    <div class="real-cta reveal">
+      <a href="https://www.instagram.com/sameclair" target="_blank" rel="noopener">Voir les 170 publications sur Instagram →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROCESSUS
+============================================================ -->
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Comment ça se passe</span>
+      <h2 class="section-title">Simple et sans surprise.</h2>
+    </div>
+
+    <div class="process-grid">
+      <div class="process-step reveal">
+        <div class="step-num">1</div>
+        <h3>Vous contactez Sam</h3>
+        <p>Appel, message ou Instagram DM. On définit ensemble le projet et les contraintes.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">2</div>
+        <h3>Devis gratuit</h3>
+        <p>Visite sur place, chiffrage détaillé et honnête. Matériel Schneider Electric sur les tableaux.</p>
+      </div>
+      <div class="process-step reveal">
+        <div class="step-num">3</div>
+        <h3>Intervention</h3>
+        <p>Chantier soigné, câblage propre. Les finitions comptent autant que l'installation elle-même.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TÉMOIGNAGES
+============================================================ -->
+<section class="testimonials circuit" id="temoignages">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Avis clients</span>
+      <h2 class="section-title">Ce qu'ils en disent.</h2>
+    </div>
+
+    <div class="testimonials-grid">
+      <figure class="testimonial reveal">
+        <p>« Jardin entièrement éclairé, rendu bluffant la nuit. Sam a une vraie vision esthétique en plus du savoir-faire technique. Du grand art. »</p>
+        <figcaption>
+          <span class="stars">★★★★★</span><br>
+          <span class="author">Pascal M., Isère</span>
+        </figcaption>
+      </figure>
+      <figure class="testimonial reveal">
+        <p>« Tableau refait et éclairage LED dans tout l'appartement. Travail propre, câblage exemplaire, Sam explique bien chaque étape. Je recommande. »</p>
+        <figcaption>
+          <span class="stars">★★★★★</span><br>
+          <span class="author">Laure T., Grenoble</span>
+        </figcaption>
+      </figure>
+      <figure class="testimonial reveal">
+        <p>« Motorisation volets et portail, plus installation LED escalier. Réactif, ponctuel, et le résultat est exactement ce qu'on imaginait. »</p>
+        <figcaption>
+          <span class="stars">★★★★★</span><br>
+          <span class="author">Christophe B., Isère</span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CONTACT
+============================================================ -->
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow">Contact &amp; devis</span>
+      <h2 class="section-title">On allume votre projet.</h2>
+      <p class="section-sub">Devis gratuit · Isère (38) · Particuliers &amp; professionnels</p>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Bloc gauche -->
+      <div class="contact-left reveal">
+        <a href="https://www.instagram.com/sameclair" target="_blank" rel="noopener" class="btn-dm">DM sur Instagram @sameclair</a>
+        <ul class="contact-info">
+          <li>
+            <span class="lbl">Téléphone</span>
+            <!-- À COMPLÉTER : numéro de téléphone non fourni dans le brief -->
+            <a href="tel:">06 00 00 00 00</a>
+          </li>
+          <li>
+            <span class="lbl">Zone d'intervention</span>
+            📍 Isère (38) · Rhône-Alpes
+          </li>
+          <li class="network">
+            Membre des illuminés <a href="https://www.instagram.com/lecomptoir38" target="_blank" rel="noopener">@lecomptoir38</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Bloc droit — formulaire -->
+      <form class="contact-form reveal" action="#" method="post" novalidate>
+        <div class="form-row">
+          <div class="field">
+            <label for="nom">Prénom &amp; Nom</label>
+            <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+          </div>
+          <div class="field">
+            <label for="tel">Téléphone</label>
+            <input type="tel" id="tel" name="tel" placeholder="06 …" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="vous@email.fr" required>
+        </div>
+        <div class="field">
+          <label for="projet">Type de projet</label>
+          <select id="projet" name="projet">
+            <option value="depannage">Dépannage</option>
+            <option value="neuf-reno">Neuf &amp; rénovation</option>
+            <option value="led">Éclairage LED</option>
+            <option value="jardin">Éclairage de jardin</option>
+            <option value="motorisation">Motorisation</option>
+            <option value="tableau">Tableau électrique</option>
+            <option value="autre">Autre</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Description</label>
+          <textarea id="message" name="message" placeholder="Décrivez votre projet…"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Envoyer ma demande</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="f-logo">SAM ÉCLAIR ÉLECTRICITÉ</div>
+    <p class="f-tag">La lumière, avec 20 ans de passion.</p>
+    <div class="f-social">
+      <a href="https://www.instagram.com/sameclair" target="_blank" rel="noopener">@sameclair</a>
+      <a href="https://www.instagram.com/lecomptoir38" target="_blank" rel="noopener">@lecomptoir38</a>
+    </div>
+    <p class="f-copy">© 2026 Sam Éclair Électricité — Isère (38)</p>
+    <p class="f-credit">Site réalisé par <a href="https://paymentflow.fr" target="_blank" rel="noopener">Payment Flow</a></p>
+  </div>
+</footer>
+
+<!-- ============================================================
+     JAVASCRIPT — mode strict, zéro dépendance, zéro localStorage
+============================================================ -->
+<script>
+'use strict';
+
+(function () {
+  /* ---- Header : intensification de la bordure au scroll > 60px ---- */
+  var header = document.getElementById('header');
+  function onScroll() {
+    if (window.scrollY > 60) header.classList.add('scrolled');
+    else header.classList.remove('scrolled');
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  /* ---- Menu mobile (hamburger + overlay fullscreen) ---- */
+  var burger = document.getElementById('burger');
+  var overlay = document.getElementById('mobileOverlay');
+  function closeMenu() {
+    burger.classList.remove('open');
+    overlay.classList.remove('open');
+    burger.setAttribute('aria-expanded', 'false');
+  }
+  burger.addEventListener('click', function () {
+    var isOpen = burger.classList.toggle('open');
+    overlay.classList.toggle('open', isOpen);
+    burger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  overlay.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', closeMenu);
+  });
+
+  /* ---- Scroll reveal via IntersectionObserver (avec stagger) ---- */
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+
+  if (prefersReduced || !('IntersectionObserver' in window)) {
+    revealEls.forEach(function (el) { el.classList.add('revealed'); });
+  } else {
+    var observer = new IntersectionObserver(function (entries, obs) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var el = entry.target;
+          // stagger 0.08s selon la position parmi ses voisins révélés simultanément
+          var siblings = Array.prototype.slice.call(
+            el.parentElement.querySelectorAll('.reveal')
+          );
+          var idx = siblings.indexOf(el);
+          el.style.transitionDelay = (idx >= 0 ? idx * 0.08 : 0) + 's';
+          el.classList.add('revealed');
+          obs.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+    revealEls.forEach(function (el) { observer.observe(el); });
+  }
+
+  /* ---- Scrollspy : lien de nav actif ---- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.nav-links a'));
+  var sections = navLinks
+    .map(function (link) {
+      var id = link.getAttribute('href').slice(1);
+      return document.getElementById(id);
+    })
+    .filter(Boolean);
+
+  if ('IntersectionObserver' in window && sections.length) {
+    var spy = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var id = entry.target.id;
+          navLinks.forEach(function (link) {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+          });
+        }
+      });
+    }, { threshold: 0.4, rootMargin: '-30% 0px -50% 0px' });
+
+    sections.forEach(function (sec) { spy.observe(sec); });
+  }
+
+  /* ---- Formulaire : feedback simple (à brancher sur Web3Forms/Formspree) ---- */
+  var form = document.querySelector('.contact-form');
+  if (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var btn = form.querySelector('.btn-submit');
+      btn.textContent = 'Merci ! Sam vous recontacte vite.';
+      window.setTimeout(function () { btn.textContent = 'Envoyer ma demande'; }, 4000);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
